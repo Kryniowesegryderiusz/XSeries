@@ -260,6 +260,11 @@ public final class XTag<T extends XBase<?, ?>> {
     @NotNull
     public static final XTag<XMaterial> CRYSTAL_SOUND_BLOCKS;
     /**
+     * Tag representing all possible variants of cushions
+     */
+    @NotNull
+    public static final XTag<XMaterial> CUSHIONS;
+    /**
      * Tag representing all dark oak log and bark variants
      */
     @NotNull
@@ -673,6 +678,11 @@ public final class XTag<T extends XBase<?, ?>> {
      */
     @NotNull
     public static final XTag<XMaterial> POLAR_BEARS_SPAWNABLE_ON_IN_FROZEN_OCEAN;
+    /**
+     * Tag representing all poplar log and bark variants
+     */
+    @NotNull
+    public static final XTag<XMaterial> POPLAR_LOGS;
     /**
      * Tag representing all possible block types that be used as portals
      */
@@ -1206,6 +1216,11 @@ public final class XTag<T extends XBase<?, ?>> {
                 XMaterial.PALE_OAK_WOOD,
                 XMaterial.STRIPPED_PALE_OAK_WOOD
         );
+		POPLAR_LOGS = TagBuilder.simple(
+				XMaterial.STRIPPED_POPLAR_LOG, 
+				XMaterial.POPLAR_LOG, 
+				XMaterial.POPLAR_WOOD,
+				XMaterial.STRIPPED_POPLAR_WOOD);
         SPRUCE_LOGS = TagBuilder.simple(
                 XMaterial.STRIPPED_SPRUCE_LOG,
                 XMaterial.SPRUCE_LOG,
@@ -1418,6 +1433,7 @@ public final class XTag<T extends XBase<?, ?>> {
                 XMaterial.STRIPPED_WARPED_HYPHAE);
         CRYSTAL_SOUND_BLOCKS = TagBuilder.simple(XMaterial.AMETHYST_BLOCK,
                 XMaterial.BUDDING_AMETHYST);
+		CUSHIONS = TagBuilder.simple(findAllColors("CUSHION"));
         DEEPSLATE_ORE_REPLACEABLES = TagBuilder.simple(XMaterial.TUFF,
                 XMaterial.DEEPSLATE);
         DOORS = TagBuilder.of(XMaterial.IRON_DOOR).inheritFrom(WOODEN_DOORS).build();
@@ -1495,6 +1511,7 @@ public final class XTag<T extends XBase<?, ?>> {
                 XMaterial.POTTED_DEAD_BUSH,
                 XMaterial.POTTED_DARK_OAK_SAPLING,
                 XMaterial.POTTED_PALE_OAK_SAPLING,
+                XMaterial.POTTED_POPLAR_SAPLING,
                 XMaterial.POTTED_SPRUCE_SAPLING,
                 XMaterial.POTTED_JUNGLE_SAPLING,
                 XMaterial.POTTED_BIRCH_SAPLING,
@@ -1558,6 +1575,7 @@ public final class XTag<T extends XBase<?, ?>> {
                 XMaterial.ACACIA_BOAT,
                 XMaterial.DARK_OAK_BOAT,
                 XMaterial.PALE_OAK_BOAT,
+                XMaterial.POPLAR_BOAT,
                 XMaterial.BIRCH_BOAT,
                 XMaterial.SPRUCE_BOAT,
                 XMaterial.JUNGLE_BOAT,
@@ -1602,7 +1620,10 @@ public final class XTag<T extends XBase<?, ?>> {
                 XMaterial.MANGROVE_LEAVES,
                 XMaterial.OAK_LEAVES,
                 XMaterial.PALE_OAK_LEAVES,
-                XMaterial.SPRUCE_LEAVES);
+                XMaterial.SPRUCE_LEAVES,
+                XMaterial.ORANGE_POPLAR_LEAVES,
+                XMaterial.RED_POPLAR_LEAVES,
+                XMaterial.YELLOW_POPLAR_LEAVES);
         NON_WOODEN_STAIRS = TagBuilder.simple(XMaterial.STONE_BRICK_STAIRS,
                 XMaterial.STONE_STAIRS,
                 XMaterial.POLISHED_BLACKSTONE_BRICK_STAIRS,
@@ -1642,7 +1663,10 @@ public final class XTag<T extends XBase<?, ?>> {
                 XMaterial.END_STONE_BRICK_STAIRS,
                 XMaterial.WAXED_OXIDIZED_CUT_COPPER_STAIRS,
                 XMaterial.SMOOTH_SANDSTONE_STAIRS,
-                XMaterial.BLACKSTONE_STAIRS);
+                XMaterial.BLACKSTONE_STAIRS,
+                findAllColors("CONCRETE_STAIRS"),
+                findAllColors("WOOL_STAIRS")
+        		);
         STAIRS = TagBuilder.simple(NON_WOODEN_STAIRS, WOODEN_STAIRS);
         NON_WOODEN_SLABS = TagBuilder.simple(XMaterial.MOSSY_COBBLESTONE_SLAB,
                 XMaterial.EXPOSED_CUT_COPPER_SLAB,
@@ -1687,7 +1711,10 @@ public final class XTag<T extends XBase<?, ?>> {
                 XMaterial.PETRIFIED_OAK_SLAB,
                 XMaterial.WAXED_WEATHERED_CUT_COPPER_SLAB,
                 XMaterial.BRICK_SLAB,
-                XMaterial.POLISHED_GRANITE_SLAB);
+                XMaterial.POLISHED_GRANITE_SLAB,
+                findAllColors("CONCRETE_SLAB"),
+                findAllColors("WOOL_SLAB")
+        		);
         POTTERY_SHERDS = TagBuilder.simple(XMaterial.ANGLER_POTTERY_SHERD,
                 XMaterial.ARCHER_POTTERY_SHERD,
                 XMaterial.ARMS_UP_POTTERY_SHERD,
@@ -1732,6 +1759,7 @@ public final class XTag<T extends XBase<?, ?>> {
                 XMaterial.SPRUCE_SAPLING,
                 XMaterial.DARK_OAK_SAPLING,
                 XMaterial.PALE_OAK_SAPLING,
+                XMaterial.POPLAR_SAPLING,
                 XMaterial.AZALEA,
                 XMaterial.OAK_SAPLING,
                 XMaterial.FLOWERING_AZALEA,
@@ -2046,6 +2074,9 @@ public final class XTag<T extends XBase<?, ?>> {
                 XMaterial.FLOWERING_AZALEA_LEAVES,
                 XMaterial.DARK_OAK_LEAVES,
                 XMaterial.PALE_OAK_LEAVES,
+                XMaterial.ORANGE_POPLAR_LEAVES,
+                XMaterial.RED_POPLAR_LEAVES,
+                XMaterial.YELLOW_POPLAR_LEAVES,
                 XMaterial.SHROOMLIGHT,
                 XMaterial.BIRCH_LEAVES,
                 XMaterial.DRIED_KELP_BLOCK,
@@ -2123,7 +2154,15 @@ public final class XTag<T extends XBase<?, ?>> {
                 XMaterial.OAK_LOG,
                 XMaterial.ACACIA_LEAVES,
                 XMaterial.STRIPPED_WARPED_HYPHAE,
-                XMaterial.BIRCH_LOG);
+                XMaterial.BIRCH_LOG,
+                XMaterial.POPLAR_LOG,
+                XMaterial.STRIPPED_POPLAR_LOG,
+                XMaterial.POPLAR_WOOD,
+                XMaterial.STRIPPED_POPLAR_WOOD,
+                XMaterial.ORANGE_POPLAR_LEAVES,
+                XMaterial.RED_POPLAR_LEAVES,
+                XMaterial.YELLOW_POPLAR_LEAVES             
+                );
         LEATHER_ARMOR_PIECES = TagBuilder.simple(XMaterial.LEATHER_HELMET,
                 XMaterial.LEATHER_CHESTPLATE,
                 XMaterial.LEATHER_LEGGINGS,
@@ -2374,7 +2413,8 @@ public final class XTag<T extends XBase<?, ?>> {
                 JUNGLE_LOGS,
                 BIRCH_LOGS,
                 MANGROVE_LOGS,
-                CHERRY_LOGS
+                CHERRY_LOGS,
+                POPLAR_LOGS
         );
         LOGS = TagBuilder.simple(
                 LOGS_THAT_BURN,
@@ -2747,7 +2787,7 @@ public final class XTag<T extends XBase<?, ?>> {
 
     private static XMaterial[] findAllWoodTypes(String material) {
         String[] woodPrefixes = {"ACACIA", "DARK_OAK", "PALE_OAK", "JUNGLE", "BIRCH", "WARPED", "OAK", "SPRUCE", "CRIMSON",
-                "MANGROVE", "CHERRY", "BAMBOO"};
+                "MANGROVE", "CHERRY", "BAMBOO", "POPLAR"};
         List<XMaterial> list = new ArrayList<>();
         for (String wood : woodPrefixes) {
             XMaterial.matchXMaterial(wood + '_' + material).ifPresent(list::add);
@@ -2838,6 +2878,7 @@ public final class XTag<T extends XBase<?, ?>> {
             case POTTED_DANDELION:
             case POTTED_DARK_OAK_SAPLING:
             case POTTED_PALE_OAK_SAPLING:
+            case POTTED_POPLAR_SAPLING:
             case POTTED_DEAD_BUSH:
             case POTTED_FERN:
             case POTTED_JUNGLE_SAPLING:
@@ -2864,6 +2905,7 @@ public final class XTag<T extends XBase<?, ?>> {
             case SPRUCE_WALL_SIGN:
             case DARK_OAK_WALL_SIGN:
             case PALE_OAK_WALL_SIGN:
+            case POPLAR_WALL_SIGN:
             case WALL_TORCH:
             case WATER:
             case WHITE_WALL_BANNER:
@@ -2913,6 +2955,12 @@ public final class XTag<T extends XBase<?, ?>> {
             case PALE_OAK_FENCE_GATE:
             case PALE_OAK_STAIRS:
             case PALE_OAK_TRAPDOOR:
+            case POPLAR_BUTTON:
+            case POPLAR_DOOR:
+            case POPLAR_FENCE:
+            case POPLAR_FENCE_GATE:
+            case POPLAR_STAIRS:
+            case POPLAR_TRAPDOOR:
             case BIRCH_FENCE_GATE:
             case BIRCH_STAIRS:
             case BIRCH_TRAPDOOR:
@@ -2998,6 +3046,7 @@ public final class XTag<T extends XBase<?, ?>> {
             case POTTED_DANDELION:
             case POTTED_DARK_OAK_SAPLING:
             case POTTED_PALE_OAK_SAPLING:
+            case POTTED_POPLAR_SAPLING:
             case POTTED_DEAD_BUSH:
             case POTTED_FERN:
             case POTTED_JUNGLE_SAPLING:
@@ -3049,6 +3098,7 @@ public final class XTag<T extends XBase<?, ?>> {
             case SPRUCE_WALL_SIGN:
             case DARK_OAK_WALL_SIGN:
             case PALE_OAK_WALL_SIGN:
+            case POPLAR_WALL_SIGN:
             case WHITE_BED:
             case WHITE_SHULKER_BOX:
             case YELLOW_BED:
